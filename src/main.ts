@@ -1,12 +1,16 @@
 import { movePlayer, drawScene } from "./LightAndSmoke";
+import { init } from "./DissolveEffect";
 
 import "./style.css";
 
-function animate() {
-  movePlayer();
-  drawScene();
+//function animate():void {
+//  movePlayer();
+//  drawScene();
+//
+//  requestAnimationFrame(animate);
+//}
+//
+//animate();
 
-  requestAnimationFrame(animate);
-}
 
-animate();
+init();

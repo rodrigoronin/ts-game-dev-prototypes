@@ -1,13 +1,11 @@
-const canvas: HTMLCanvasElement = document.getElementById('canvas') as HTMLCanvasElement;
-const ctx: CanvasRenderingContext2D = canvas?.getContext('2d') as CanvasRenderingContext2D;
+const canvas:HTMLCanvasElement = document.getElementById('canvas') as HTMLCanvasElement;
+const ctx:CanvasRenderingContext2D = canvas?.getContext('2d') as CanvasRenderingContext2D;
 
 // Canvas secundário para a máscara de luz e sombra
-const shadowCanvas = document.createElement('canvas');
+const shadowCanvas:HTMLCanvasElement = document.createElement('canvas');
 shadowCanvas.width = canvas.width;
 shadowCanvas.height = canvas.height;
-const shadowCtx: CanvasRenderingContext2D = shadowCanvas.getContext('2d') as CanvasRenderingContext2D;
-
-console.log(shadowCanvas);
+const shadowCtx:CanvasRenderingContext2D = shadowCanvas.getContext('2d') as CanvasRenderingContext2D;
 
 let lightX:number = 200;
 let lightY:number = canvas.height / 2;
@@ -33,7 +31,7 @@ window.addEventListener('keyup', (e: KeyboardEvent) => {
   keys[e.key] = false;
 });
 
-function movePlayer() {
+function movePlayer():void {
   if (keys['w']) player.y -= player.speed;
   if (keys['a']) player.x -= player.speed;
   if (keys['s']) player.y += player.speed;
@@ -76,14 +74,14 @@ class Particles {
 
 let particles: Particles[] = [];
 
-function createSmoke() {
+function createSmoke():void {
   // 30% de chance de spawnar partículas por frame
   if (Math.random() < 0.5) {
     particles.push(new Particles());
   }
 }
 
-function drawLight(ctx: CanvasRenderingContext2D) {
+function drawLight(ctx: CanvasRenderingContext2D):void {
   const gradient = ctx.createRadialGradient(lightX, lightY, 0, lightX, lightY, 150);
   gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
   gradient.addColorStop(0.7, 'rgba(255, 255, 255, 0.7)');
@@ -96,7 +94,7 @@ function drawLight(ctx: CanvasRenderingContext2D) {
   ctx.fill();
 }
 
-function updateAndDrawSmoke() {
+function updateAndDrawSmoke():void {
   for (let i = particles.length - 1; i >= 0; i--) {
     particles[i].update();
     particles[i].draw();
@@ -106,7 +104,7 @@ function updateAndDrawSmoke() {
   }
 }
 
-function drawTreeShadow(ctx, x, y) {
+function drawTreeShadow(ctx:CanvasRenderingContext2D, x:number, y:number):void {
   ctx.fillStyle = 'rgba(255, 255, 255, 1)';
   ctx.beginPath();
   ctx.moveTo(x, y);
@@ -116,7 +114,7 @@ function drawTreeShadow(ctx, x, y) {
   ctx.fill();
 }
 
-function drawScene() {
+function drawScene():void {
   lightX = player.x + player.width / 2;
   lightY = player.y + player.height / 2;
 
@@ -149,7 +147,6 @@ function drawScene() {
   ctx.drawImage(shadowCanvas, 0, 0);
   ctx.globalCompositeOperation = 'source-over';
 }
-
 
 // faz a luz seguir o mouse
 //document.addEventListener('mousemove', (e: MouseEvent) => {
