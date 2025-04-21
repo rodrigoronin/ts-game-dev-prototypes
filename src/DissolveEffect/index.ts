@@ -41,12 +41,12 @@ function animate(): void {
           const dissolveThreshold = progress * 1.5;
           const alpha = noise < dissolveThreshold ? 0 : imageData.data[i + 3];
 
-          // Efeito de glitch: deslocamento aleatório em algumas linhas
+          // Glitch effect: random horizontal movement in some lines of pixels (not working)
           let offsetX = 0;
           const srcX = Math.min(Math.max(x + offsetX, 0), imageData.width - 1);
           const srcI = (y * imageData.width + srcX) * 4;
 
-          // Copia os pixels com o alfa ajustado
+          // copy pixels with modified alpha
           outputData.data[i] = imageData.data[srcI]; // R
           outputData.data[i + 1] = imageData.data[srcI + 1]; // G
           outputData.data[i + 2] = imageData.data[srcI + 2]; // B
@@ -54,9 +54,9 @@ function animate(): void {
         }
       }
 
-      // Limpa o canvas e desenha a imagem manipulada
+      // clear canvas and draw modified image
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.putImageData(outputData, 100, 100); // Posição ajustável
+      ctx.putImageData(outputData, 100, 100); // position can be adjusted
   }
 
     requestAnimationFrame(animate);
