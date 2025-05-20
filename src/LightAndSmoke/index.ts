@@ -150,12 +150,6 @@ function drawScene() {
   ctx.globalCompositeOperation = 'source-over';
 }
 
-function animate() {
-  movePlayer();
-  drawScene();
-
-  requestAnimationFrame(animate);
-}
 
 // faz a luz seguir o mouse
 //document.addEventListener('mousemove', (e: MouseEvent) => {
@@ -164,4 +158,4 @@ function animate() {
 //  lightY = e.clientY - rect.top;
 //});
 
-animate();
+export { movePlayer, drawScene };
